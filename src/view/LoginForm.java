@@ -183,11 +183,11 @@ public class LoginForm extends JFrame {
 								String roleId = rs.getString("role_id");
 								try {
 									int userIdRow = Integer.parseInt(userIdRow1);
-									int roleIdNum = Integer.parseInt(roleId);
+									int roleNumId = Integer.parseInt(roleId);
 									String tableName = getTableName(roleName);
 									JOptionPane.showMessageDialog(msg, "Success! Logged in.", "Login Panel",
 											JOptionPane.INFORMATION_MESSAGE);
-									new view.Dasbboard(userIdRow, userIdCol, tableName, roleIdNum).setVisible(true);
+									new view.Dasbboard(userIdRow, userIdCol, tableName, roleNumId).setVisible(true);
 									setVisible(false);
 									ps.close();
 								} catch (Exception ex) {

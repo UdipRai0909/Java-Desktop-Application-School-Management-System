@@ -244,6 +244,7 @@ public class Dasbboard extends JFrame {
 				newFrame.clearData();
 				newFrame.loadData();
 				newFrame.loadComboBoxDept();
+				newFrame.loadComboBoxFeeType();
 				newFrame.setVisible(true);
 			}
 		});

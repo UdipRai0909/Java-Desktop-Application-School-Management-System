@@ -135,6 +135,8 @@ public class Sections extends JFrame {
 				try {
 					Sections frame = new Sections(Integer);
 					frame.setVisible(true);
+					frame.clearData();
+					frame.loadData();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -144,6 +146,8 @@ public class Sections extends JFrame {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Sections(Integer roleNumId) {
+		
+		setResizable(false);
 		setTitle("Sections");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 525);
@@ -266,7 +270,7 @@ public class Sections extends JFrame {
 		contentPane.add(btnSearch);
 
 		try {
-			if (roleNumId == 1 || roleNumId == 2) {
+			if (roleNumId == 1) {
 
 				JButton btnDelete = new JButton("Delete");
 				btnDelete.addActionListener(new ActionListener() {

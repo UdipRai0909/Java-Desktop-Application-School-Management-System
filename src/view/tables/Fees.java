@@ -132,8 +132,12 @@ public class Fees extends JFrame {
 	}
 
 	public Fees(Integer roleNumId) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		setResizable(false);
+		setTitle("Fees");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 914, 564);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -152,7 +156,7 @@ public class Fees extends JFrame {
 		table.setModel(new DefaultTableModel(new Object[][] {},
 				new String[] { "Id", "Crs Id", "Amount", "Type", "Description" }) {
 			private static final long serialVersionUID = 1L;
-			boolean[] columnEditables = new boolean[] { false, false, false, false, false, false, false, false };
+			boolean[] columnEditables = new boolean[] { false, false, false, false, false };
 
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -397,46 +401,31 @@ public class Fees extends JFrame {
 											JOptionPane.WARNING_MESSAGE);
 									clearData();
 								} else {
-
-									readQuery = "SELECT * FROM fees WHERE fee_type = ?";
-									ps = DBConnection.connectDB().prepareStatement(readQuery);
-									ps.setString(1, feeType);
-									rs = ps.executeQuery();
-
-									while (rs.next()) {
-										count++;
-									}
-									if (count > 0) {
-										JOptionPane.showMessageDialog(messageFrame, dataDuplicate, currentPanel,
-												JOptionPane.WARNING_MESSAGE);
-										clearData();
-									} else {
-										updateQuery = "UPDATE fees SET fee_crs_id = ?, fee_amount = ?, fee_type = ?, fee_description = ? WHERE fee_id = ?";
-										ps = DBConnection.connectDB().prepareStatement(updateQuery);
-										ps.setString(1, feeCrs);
-										ps.setInt(2, numFee);
-										ps.setString(3, feeType);
-										ps.setString(4, feeDescription);
-										ps.setInt(5, id);
-										try {
-											if (ps.executeUpdate() > 0) {
-												JOptionPane.showMessageDialog(messageFrame, updateDataSuccess,
-														currentPanel, JOptionPane.INFORMATION_MESSAGE);
-												clearData();
-												loadData();
-												ps.close();
-											} else {
-												JOptionPane.showMessageDialog(messageFrame, dataNoConnection,
-														currentPanel, JOptionPane.ERROR_MESSAGE);
-												clearData();
-												ps.close();
-											}
-										} catch (Exception ex) {
-											JOptionPane.showMessageDialog(messageFrame, dataError + ex.getMessage(),
-													currentPanel, JOptionPane.ERROR_MESSAGE);
+									updateQuery = "UPDATE fees SET fee_crs_id = ?, fee_amount = ?, fee_type = ?, fee_description = ? WHERE fee_id = ?";
+									ps = DBConnection.connectDB().prepareStatement(updateQuery);
+									ps.setString(1, feeCrs);
+									ps.setInt(2, numFee);
+									ps.setString(3, feeType);
+									ps.setString(4, feeDescription);
+									ps.setInt(5, id);
+									try {
+										if (ps.executeUpdate() > 0) {
+											JOptionPane.showMessageDialog(messageFrame, updateDataSuccess, currentPanel,
+													JOptionPane.INFORMATION_MESSAGE);
+											clearData();
+											loadData();
+											ps.close();
+										} else {
+											JOptionPane.showMessageDialog(messageFrame, dataNoConnection, currentPanel,
+													JOptionPane.ERROR_MESSAGE);
 											clearData();
 											ps.close();
 										}
+									} catch (Exception ex) {
+										JOptionPane.showMessageDialog(messageFrame, dataError + ex.getMessage(),
+												currentPanel, JOptionPane.ERROR_MESSAGE);
+										clearData();
+										ps.close();
 									}
 								}
 							}

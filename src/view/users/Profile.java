@@ -45,7 +45,7 @@ public class Profile extends JFrame {
 	public Profile(Integer userIdRow, String userIdCol, String tableName) {
 		setTitle("Profile Page");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 323, 400);
+		setBounds(100, 100, 323, 445);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,96 +55,96 @@ public class Profile extends JFrame {
 		Icon iconBackground = new ImageIcon(this.getClass().getResource("/wood-background.jpeg"));
 
 		JLabel lblProfile = new JLabel("Profile");
-		lblProfile.setVerticalTextPosition(SwingConstants.BOTTOM);
-		lblProfile.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblProfile.setVerticalAlignment(SwingConstants.TOP);
+		lblProfile.setVerticalTextPosition(SwingConstants.TOP);
 		lblProfile.setFont(new Font("Tekton Pro Cond", Font.PLAIN, 45));
 		lblProfile.setHorizontalAlignment(SwingConstants.CENTER);
 		lblProfile.setForeground(Color.WHITE);
-		lblProfile.setBounds(0, 11, 307, 55);
+		lblProfile.setBounds(0, 11, 307, 44);
 		contentPane.add(lblProfile);
 
 		JLabel lblFname = new JLabel("First Name");
 		lblFname.setForeground(Color.WHITE);
 		lblFname.setHorizontalAlignment(SwingConstants.LEFT);
-		lblFname.setBounds(52, 64, 79, 30);
+		lblFname.setBounds(51, 66, 79, 30);
 		contentPane.add(lblFname);
 
 		JLabel txtFname = new JLabel("");
 		txtFname.setForeground(Color.WHITE);
 		txtFname.setHorizontalAlignment(SwingConstants.LEFT);
-		txtFname.setBounds(141, 64, 130, 30);
+		txtFname.setBounds(140, 66, 130, 30);
 		contentPane.add(txtFname);
 
 		JLabel lblMidName = new JLabel("Middle Name");
 		lblMidName.setForeground(Color.WHITE);
 		lblMidName.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMidName.setBounds(52, 96, 79, 30);
+		lblMidName.setBounds(51, 98, 79, 30);
 		contentPane.add(lblMidName);
 
 		JLabel txtMidName = new JLabel("");
 		txtMidName.setForeground(Color.WHITE);
 		txtMidName.setHorizontalAlignment(SwingConstants.LEFT);
-		txtMidName.setBounds(141, 96, 130, 30);
+		txtMidName.setBounds(140, 98, 130, 30);
 		contentPane.add(txtMidName);
 
 		JLabel lblLastName = new JLabel("Last Name");
 		lblLastName.setForeground(Color.WHITE);
 		lblLastName.setHorizontalAlignment(SwingConstants.LEFT);
-		lblLastName.setBounds(52, 129, 79, 30);
+		lblLastName.setBounds(51, 131, 79, 30);
 		contentPane.add(lblLastName);
 
 		JLabel txtLastName = new JLabel("");
 		txtLastName.setForeground(Color.WHITE);
 		txtLastName.setHorizontalAlignment(SwingConstants.LEFT);
-		txtLastName.setBounds(141, 129, 130, 30);
+		txtLastName.setBounds(140, 131, 130, 30);
 		contentPane.add(txtLastName);
 
 		JLabel lblGender = new JLabel("Gender");
 		lblGender.setForeground(Color.WHITE);
 		lblGender.setHorizontalAlignment(SwingConstants.LEFT);
-		lblGender.setBounds(52, 160, 79, 30);
+		lblGender.setBounds(51, 162, 79, 30);
 		contentPane.add(lblGender);
 
 		JLabel txtGender = new JLabel("");
 		txtGender.setForeground(Color.WHITE);
 		txtGender.setHorizontalAlignment(SwingConstants.LEFT);
-		txtGender.setBounds(141, 160, 130, 30);
+		txtGender.setBounds(140, 162, 130, 30);
 		contentPane.add(txtGender);
 
 		JLabel lblDob = new JLabel("Date of Birth");
 		lblDob.setForeground(Color.WHITE);
 		lblDob.setHorizontalAlignment(SwingConstants.LEFT);
-		lblDob.setBounds(52, 191, 79, 30);
+		lblDob.setBounds(51, 193, 79, 30);
 		contentPane.add(lblDob);
 
 		JLabel txtDob = new JLabel("");
 		txtDob.setForeground(Color.WHITE);
 		txtDob.setHorizontalAlignment(SwingConstants.LEFT);
-		txtDob.setBounds(141, 191, 130, 30);
+		txtDob.setBounds(140, 193, 130, 30);
 		contentPane.add(txtDob);
 
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setForeground(Color.WHITE);
 		lblEmail.setHorizontalAlignment(SwingConstants.LEFT);
-		lblEmail.setBounds(52, 220, 79, 30);
+		lblEmail.setBounds(51, 222, 79, 30);
 		contentPane.add(lblEmail);
 
 		JLabel txtEmail = new JLabel("");
 		txtEmail.setForeground(Color.WHITE);
 		txtEmail.setHorizontalAlignment(SwingConstants.LEFT);
-		txtEmail.setBounds(141, 220, 130, 30);
+		txtEmail.setBounds(140, 222, 130, 30);
 		contentPane.add(txtEmail);
 
 		JLabel lblContact = new JLabel("Contact");
 		lblContact.setForeground(Color.WHITE);
 		lblContact.setHorizontalAlignment(SwingConstants.LEFT);
-		lblContact.setBounds(52, 252, 79, 30);
+		lblContact.setBounds(51, 254, 79, 30);
 		contentPane.add(lblContact);
 
 		JLabel txtContact = new JLabel("");
 		txtContact.setForeground(Color.WHITE);
 		txtContact.setHorizontalAlignment(SwingConstants.LEFT);
-		txtContact.setBounds(141, 252, 130, 30);
+		txtContact.setBounds(140, 254, 130, 30);
 		contentPane.add(txtContact);
 		
 		JButton btnExit = new JButton("Exit");
@@ -157,26 +157,44 @@ public class Profile extends JFrame {
 		btnExit.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnExit.setBorder(new LineBorder(Color.WHITE, 2));
 		btnExit.setBackground(new Color(139, 69, 19));
-		btnExit.setBounds(217, 321, 66, 23);
+		btnExit.setBounds(216, 360, 66, 23);
 		contentPane.add(btnExit);
 				
 				lblPwd = new JLabel("Password");
 				lblPwd.setHorizontalAlignment(SwingConstants.LEFT);
 				lblPwd.setForeground(Color.WHITE);
-				lblPwd.setBounds(52, 280, 79, 30);
+				lblPwd.setBounds(51, 282, 79, 30);
 				contentPane.add(lblPwd);
 				
 				JLabel txtPass = new JLabel("");
 				txtPass.setHorizontalAlignment(SwingConstants.LEFT);
 				txtPass.setForeground(Color.WHITE);
-				txtPass.setBounds(141, 280, 130, 30);
+				txtPass.setBounds(140, 282, 130, 30);
 				contentPane.add(txtPass);
-				
-						JLabel lblBackground = new JLabel("");
-						lblBackground.setForeground(Color.WHITE);
-						lblBackground.setBounds(0, 0, 307, 361);
-						lblBackground.setIcon(iconBackground);
-						contentPane.add(lblBackground);
+						
+						JLabel lblRoleCategory = new JLabel("Role Category  : ");
+						lblRoleCategory.setVerticalTextPosition(SwingConstants.BOTTOM);
+						lblRoleCategory.setVerticalAlignment(SwingConstants.BOTTOM);
+						lblRoleCategory.setHorizontalAlignment(SwingConstants.LEFT);
+						lblRoleCategory.setForeground(Color.WHITE);
+						lblRoleCategory.setFont(new Font("Tekton Pro Cond", Font.PLAIN, 25));
+						lblRoleCategory.setBounds(42, 323, 138, 38);
+						contentPane.add(lblRoleCategory);
+								
+								JLabel txtRoleCategory = new JLabel("admins");
+								txtRoleCategory.setVerticalTextPosition(SwingConstants.BOTTOM);
+								txtRoleCategory.setVerticalAlignment(SwingConstants.BOTTOM);
+								txtRoleCategory.setHorizontalAlignment(SwingConstants.LEFT);
+								txtRoleCategory.setForeground(Color.WHITE);
+								txtRoleCategory.setFont(new Font("Tekton Pro Cond", Font.PLAIN, 25));
+								txtRoleCategory.setBounds(180, 323, 117, 38);
+								contentPane.add(txtRoleCategory);
+								
+										JLabel lblBackground = new JLabel("");
+										lblBackground.setForeground(Color.WHITE);
+										lblBackground.setBounds(0, 0, 307, 406);
+										lblBackground.setIcon(iconBackground);
+										contentPane.add(lblBackground);
 
 		try {
 
@@ -198,6 +216,7 @@ public class Profile extends JFrame {
 				txtEmail.setText(rs.getString("email"));
 				txtPass.setText(rs.getString("password"));
 				txtContact.setText(rs.getString("contact"));
+				txtRoleCategory.setText(tableName);
 			}
 
 		} catch (Exception ex) {

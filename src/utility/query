@@ -70,8 +70,8 @@ CREATE TABLE roles (
 INSERT INTO roles(role_name, description)
 VALUES
 ("admin", "The admin can view and edit any data except other admin's data."),
-("student", "A student can view any data except admin data. He/She can only edit his/her own data."),
-("teacher", "A teacher can view any data except admin data. He/She can edit his/her own data, students' data but not the data of teachers and the admin.");
+("teacher", "A teacher can view any data except admin data. He/She can edit his/her own data, students' data but not the data of teachers and the admin."),
+("student", "A student can view any data except admin data. He/She can only edit his/her own data.");
 
 
 CREATE TABLE exams (
@@ -223,11 +223,4 @@ ADD COLUMN section_id INT UNSIGNED,
 ADD CONSTRAINT section1_id_fk
 FOREIGN KEY(section_id)
 REFERENCES sections(section_id);
-
-
-
-
-
-
-
 

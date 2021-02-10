@@ -43,6 +43,8 @@ public class Courses extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private JTextField txtSearch;
+	private JTextField txtTitle;
 	JComboBox<String> cboDepartment = new JComboBox<String>();
 	JComboBox<String> cboFeeType = new JComboBox<String>();
 	TextArea textAreaRemarks = new TextArea();
@@ -77,17 +79,15 @@ public class Courses extends JFrame {
 	String dataFound = " items found.";
 	String dataNotFound = "No such data found!";
 	String dataOutOfBounds = "The value is out of bounds.";
-	String dataNewYear = "Choose 2021 as year.";
 	String dataRange = "Credits should be between (0.5 - 3.0)";
-	private JTextField txtSearch;
-	private JTextField txtTitle;
+
 
 	public void clearData() {
 		txtTitle.setText(null);
 		spinnerCredits.setModel(new SpinnerNumberModel(0.0, 0.0, 3.0, 0.5));
 		textAreaRemarks.setText(null);
 		cboDepartment.setSelectedIndex(0);
-		cboDepartment.setSelectedIndex(0);
+		cboFeeType.setSelectedIndex(0);
 		count = 0;
 	}
 
@@ -116,6 +116,20 @@ public class Courses extends JFrame {
 			System.out.println(ex.getMessage());
 		}
 	}
+	
+	public void loadComboBoxFeeType() {
+		try {
+			readQuery = "SELECT * FROM fees";
+			ps = DBConnection.connectDB().prepareStatement(readQuery);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				cboFeeType.addItem(rs.getString("fee_type"));
+			}
+			ps.close();
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
 
 	public boolean checkInputRange(int input) {
 		if (input < 3) {
@@ -135,20 +149,16 @@ public class Courses extends JFrame {
 		}
 	}
 
-	public boolean isDateRange(int year) {
-		if (year == 2021) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Courses frame = new Courses(Integer);
 					frame.setVisible(true);
+					frame.clearData();
+					frame.loadData();
+					frame.loadComboBoxDept();
+					frame.loadComboBoxFeeType();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -157,6 +167,8 @@ public class Courses extends JFrame {
 	}
 
 	public Courses(Integer roleNumId) {
+		
+		setResizable(false);
 		setTitle("Courses");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 525);
@@ -204,6 +216,7 @@ public class Courses extends JFrame {
 					credits = table.getModel().getValueAt(row, 2).toString();
 					remarks = table.getModel().getValueAt(row, 3).toString();
 					department = table.getModel().getValueAt(row, 4).toString();
+					feeType = table.getModel().getValueAt(row, 5).toString();
 
 					txtTitle.setText(title);
 					spinnerCredits.setValue(Double.parseDouble(credits));
@@ -218,9 +231,11 @@ public class Courses extends JFrame {
 
 					if (rs.next()) {
 						departmentId = java.lang.Integer.parseInt(rs.getString("department_id"));
+						feeId = java.lang.Integer.parseInt(rs.getString("fee_id"));
 					}
 
 					cboDepartment.setSelectedIndex(departmentId);
+					cboFeeType.setSelectedIndex(feeId);
 					ps.close();
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(messageFrame, dataError + ex.getMessage(), currentPanel,
@@ -426,8 +441,12 @@ public class Courses extends JFrame {
 						credits = spinnerCredits.getValue().toString();
 						remarks = textAreaRemarks.getText().toString();
 						department = cboDepartment.getSelectedItem().toString();
+						feeType = cboFeeType.getSelectedItem().toString();
 
 						departmentId = cboDepartment.getSelectedIndex();
+						feeId = cboFeeType.getSelectedIndex();
+						
+						
 						row = table.getSelectedRow();
 						id = java.lang.Integer.parseInt(table.getModel().getValueAt(row, column).toString());
 
@@ -449,7 +468,7 @@ public class Courses extends JFrame {
 												JOptionPane.WARNING_MESSAGE);
 										clearData();
 									} else {
-										updateQuery = "UPDATE courses SET title = ?, credits = ?, remarks = ?, department_id = ?, fee_id WHERE course_id = ?";
+										updateQuery = "UPDATE courses SET title = ?, credits = ?, remarks = ?, department_id = ?, fee_id = ? WHERE course_id = ?";
 										ps = DBConnection.connectDB().prepareStatement(updateQuery);
 										ps.setString(1, title);
 										ps.setDouble(2, creditNum);

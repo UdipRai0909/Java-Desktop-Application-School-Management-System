@@ -245,7 +245,8 @@ public class Students extends JFrame {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Students(final Integer roleNumId) {
+	public Students(Integer roleNumId) {
+		
 		setResizable(false);
 		setTitle("Students");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -486,7 +487,7 @@ public class Students extends JFrame {
 							departmentId = cboDepartment.getSelectedIndex();
 							gradeId = cboGrade.getSelectedIndex();
 							roleId = cboRole.getSelectedIndex();
-							sectionId = cboRole.getSelectedIndex();
+							sectionId = cboSection.getSelectedIndex();
 
 							SimpleDateFormat format = new SimpleDateFormat("MMM dd,yyyy");
 							Date myDob = format.parse(dateOfBirth);
@@ -622,6 +623,7 @@ public class Students extends JFrame {
 							departmentId = cboDepartment.getSelectedIndex();
 							gradeId = cboGrade.getSelectedIndex();
 							roleId = cboRole.getSelectedIndex();
+							sectionId = cboSection.getSelectedIndex();
 
 							SimpleDateFormat format = new SimpleDateFormat("MMM dd,yyyy");
 							Date myDob = format.parse(dateOfBirth);

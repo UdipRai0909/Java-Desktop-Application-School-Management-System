@@ -194,6 +194,8 @@ public class Exams extends JFrame {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Exams(Integer roleNumId) {
+		
+		setResizable(false);
 		setTitle("Exams");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 525);
@@ -267,7 +269,7 @@ public class Exams extends JFrame {
 					}
 
 					cboDepartment.setSelectedIndex(departmentId);
-					cboFeeType.setSelectedIndex(departmentId);
+					cboFeeType.setSelectedIndex(feeId);
 					ps.close();
 
 				} catch (Exception ex) {
@@ -505,7 +507,7 @@ public class Exams extends JFrame {
 												JOptionPane.WARNING_MESSAGE);
 
 									} else {
-										updateQuery = "UPDATE exams SET exam_type = ?, subject = ?, exam_date = ?, time = ?, remarks = ?, department_id = ?, fee_type = ? WHERE exam_id = ?";
+										updateQuery = "UPDATE exams SET exam_type = ?, subject = ?, exam_date = ?, time = ?, remarks = ?, department_id = ?, fee_id = ? WHERE exam_id = ?";
 										ps = DBConnection.connectDB().prepareStatement(updateQuery);
 										ps.setString(1, examType);
 										ps.setString(2, subject);

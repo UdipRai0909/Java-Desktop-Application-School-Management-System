@@ -210,7 +210,9 @@ public class Teachers extends JFrame {
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public Teachers(final Integer roleNumId) {
+	public Teachers(Integer roleNumId) {
+		
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Teachers");
 		setBounds(100, 100, 900, 525);
@@ -439,6 +441,7 @@ public class Teachers extends JFrame {
 							lnameLength = middleName.length();
 							pwdLength = password.length();
 							cctLength = contactNumber.length();
+							
 							departmentId = cboDepartment.getSelectedIndex();
 							roleId = cboRole.getSelectedIndex();
 
@@ -568,6 +571,7 @@ public class Teachers extends JFrame {
 							lnameLength = middleName.length();
 							pwdLength = password.length();
 							cctLength = contactNumber.length();
+							
 							departmentId = cboDepartment.getSelectedIndex();
 							roleId = cboRole.getSelectedIndex();
 

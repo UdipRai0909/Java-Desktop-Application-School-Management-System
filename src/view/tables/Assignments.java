@@ -128,7 +128,7 @@ public class Assignments extends JFrame {
 				firstName = rs.getString("first_name");
 				middleName = rs.getString("middle_name");
 				lastName = rs.getString("last_name");
-				cboTeacher.addItem(firstName + middleName + lastName);
+				cboTeacher.addItem(firstName + " " + middleName + " " + lastName);
 			}
 			ps.close();
 		} catch (Exception ex) {
@@ -179,6 +179,10 @@ public class Assignments extends JFrame {
 				try {
 					Assignments frame = new Assignments(Integer);
 					frame.setVisible(true);
+					frame.clearData();
+					frame.loadData();
+					frame.loadComboBoxDept();
+					frame.loadComboBoxTeacher();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -187,7 +191,8 @@ public class Assignments extends JFrame {
 	}
 
 	public Assignments(Integer roleNumId) {
-
+		
+		setResizable(false);
 		setTitle("Assignments");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 900, 525);

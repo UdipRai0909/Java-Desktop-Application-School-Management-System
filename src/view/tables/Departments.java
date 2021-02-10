@@ -35,6 +35,7 @@ public class Departments extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	protected static final Integer Integer = null;
+	
 	private JPanel contentPane;
 	private JTable table;
 	private JLabel lblDepartmentName;
@@ -105,10 +106,8 @@ public class Departments extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Departments(Integer roleNumId) {
+		
 		setResizable(false);
 		setTitle("Departments");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -219,7 +218,7 @@ public class Departments extends JFrame {
 		contentPane.add(btnSearch);
 
 		try {
-			if(roleNumId == 1 || roleNumId == 2) {
+			if(roleNumId == 1) {
 				JButton btnDelete = new JButton("Delete");
 				btnDelete.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

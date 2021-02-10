@@ -110,6 +110,7 @@ public class Grades extends JFrame {
 	 * Create the frame.
 	 */
 	public Grades(Integer roleNumId) {
+		
 		setResizable(false);
 		setTitle("Grades");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
