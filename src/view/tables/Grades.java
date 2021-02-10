@@ -219,6 +219,7 @@ public class Grades extends JFrame {
 		contentPane.add(btnSearch);
 
 		try {
+			roleNumId = 1;
 			if (roleNumId == 1 || roleNumId == 2) {
 				JButton btnDelete = new JButton("Delete");
 				btnDelete.addActionListener(new ActionListener() {
@@ -281,7 +282,7 @@ public class Grades extends JFrame {
 
 							} else {
 								try {
-									float studentPercent2 = java.lang.Integer.parseInt(studentPercent1);
+									float studentPercent2 = java.lang.Float.parseFloat(studentPercent1);
 									if (studentPercent2 < 1 || studentPercent2 > 100) {
 										JOptionPane.showMessageDialog(messageFrame, dataRange2, currentPanel,
 												JOptionPane.WARNING_MESSAGE);
@@ -357,7 +358,7 @@ public class Grades extends JFrame {
 
 								} else {
 									try {
-										float studentPercent2 = java.lang.Integer.parseInt(studentPercent1);
+										float studentPercent2 = java.lang.Float.parseFloat(studentPercent1);
 										if (studentPercent2 < 1 || studentPercent2 > 100) {
 											JOptionPane.showMessageDialog(messageFrame, dataRange2, currentPanel,
 													JOptionPane.WARNING_MESSAGE);
