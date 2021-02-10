@@ -6,18 +6,24 @@ USE school_management_system;
 
 /* Create tables that do not have FK (Foreign Key) first:
 
-Tables:
-Departments - NO FK
-Fees - NO FK
-Grades - NO FK
-Sections - NO FK
-Roles - NO FK
-Assignments - has FK
-Teachers - has FK
-Students - has FK
-Courses - has FK
-Exams - has FK
-Admins = has FK
+Tables with no foreign keys:
+
+1. Departments 
+2. Fees 
+3. Grades 
+4. Sections 
+5. Roles
+
+
+
+Tables with foreign keys:
+
+1. Exams =========  department
+2. Admins ========  role
+3. Courses =======  department, fee
+4. Teachers ======  department, role 
+5. Assignments ===  department, teacher
+5. Students ======  department, grade, role, section
 */
 
 CREATE TABLE departments (
@@ -27,6 +33,7 @@ CREATE TABLE departments (
 	description VARCHAR(255)
 )ENGINE=INNODB;
 
+
 CREATE TABLE fees (
 	fee_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	fee_crs_id VARCHAR(60) NOT NULL,
@@ -35,12 +42,14 @@ CREATE TABLE fees (
 	fee_description VARCHAR(255)
 )ENGINE=INNODB;
 
+
 CREATE TABLE grades (
 	grade_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
 	grade CHAR(2) NOT NULL,
 	percentage DOUBLE NOT NULL,
 	remarks VARCHAR(255)
 )ENGINE=INNODB;
+
 
 CREATE TABLE sections (
 	section_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -50,6 +59,7 @@ CREATE TABLE sections (
 	rating CHAR(2),
 	active_status VARCHAR(10) NOT NULL
 )ENGINE=INNODB;
+
 
 CREATE TABLE roles (
 	role_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -64,25 +74,70 @@ VALUES
 ("teacher", "A teacher can view any data except admin data. He/She can edit his/her own data, students' data but not the data of teachers and the admin.");
 
 
-CREATE TABLE assignments (
-	assignment_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	title VARCHAR(100) NOT NULL,
-	release_date DATE NOT NULL,
-	deadline DATE NOT NULL,
-	skill_level CHAR(2) NOT NULL
+CREATE TABLE exams (
+	exam_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	exam_type VARCHAR(60) NOT NULL,
+	subject VARCHAR(60) NOT NULL,
+	exam_date DATE NOT NULL,
+	time VARCHAR(30) NOT NULL,
+	remarks VARCHAR(255)
 )ENGINE=INNODB;
 
-ALTER TABLE assignments
+ALTER TABLE exams
 ADD COLUMN department_id INT UNSIGNED,
-ADD CONSTRAINT department5_id_fk
+ADD CONSTRAINT department3_id_fk
 FOREIGN KEY(department_id)
 REFERENCES departments(department_id);
 
-ALTER TABLE assignments
-ADD COLUMN teacher_id INT UNSIGNED,
-ADD CONSTRAINT teacher1_id_fk
-FOREIGN KEY(teacher_id)
-REFERENCES teachers(teacher_id);
+ALTER TABLE exams
+ADD COLUMN fee_id INT UNSIGNED,
+ADD CONSTRAINT fee1_id_fk
+FOREIGN KEY(fee_id)
+REFERENCES fees(fee_id);
+
+
+CREATE TABLE admins (
+	admin_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	first_name VARCHAR(30) NOT NULL,
+    middle_name VARCHAR(30),
+	last_name VARCHAR(30) NOT NULL,
+	email VARCHAR(60) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+	address VARCHAR (100) NOT NULL,
+	gender VARCHAR(15),
+	date_of_birth DATE NOT NULL,
+	contact VARCHAR(50) NOT NULL
+)ENGINE=INNODB;
+
+ALTER TABLE admins
+ADD COLUMN role_id INT UNSIGNED,
+ADD CONSTRAINT role3_id_fk
+FOREIGN KEY(role_id)
+REFERENCES roles(role_id);
+
+INSERT INTO admins(first_name, middle_name, last_name, email, password, address, gender, date_of_birth, contact, role_id) 
+VALUES("Udip", "Yakkha", "Rai", "admin@gmail.com", "adminpass", "Tarkeshwor", "Male", "1998-09-24", 6633445598, 1);
+
+
+CREATE TABLE courses (
+	course_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(30) NOT NULL,
+	credits DOUBLE(3, 1) NOT NULL,
+	remarks VARCHAR(255)
+)ENGINE=INNODB;
+
+ALTER TABLE courses
+ADD COLUMN department_id INT UNSIGNED,
+ADD CONSTRAINT department4_id_fk
+FOREIGN KEY(department_id)
+REFERENCES departments(department_id);
+
+ALTER TABLE courses
+ADD COLUMN fee_id INT UNSIGNED,
+ADD CONSTRAINT fee2_id_fk
+FOREIGN KEY(fee_id)
+REFERENCES fees(fee_id);
+
 
 CREATE TABLE teachers (
 	teacher_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -109,6 +164,27 @@ ADD COLUMN role_id INT UNSIGNED,
 ADD CONSTRAINT role2_id
 FOREIGN KEY(role_id)
 REFERENCES roles(role_id);
+
+CREATE TABLE assignments (
+	assignment_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(100) NOT NULL,
+	release_date DATE NOT NULL,
+	deadline DATE NOT NULL,
+	skill_level CHAR(2) NOT NULL
+)ENGINE=INNODB;
+
+ALTER TABLE assignments
+ADD COLUMN department_id INT UNSIGNED,
+ADD CONSTRAINT department5_id_fk
+FOREIGN KEY(department_id)
+REFERENCES departments(department_id);
+
+ALTER TABLE assignments
+ADD COLUMN teacher_id INT UNSIGNED,
+ADD CONSTRAINT teacher1_id_fk
+FOREIGN KEY(teacher_id)
+REFERENCES teachers(teacher_id);
+
 
 CREATE TABLE students (
 	student_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -147,72 +223,6 @@ ADD COLUMN section_id INT UNSIGNED,
 ADD CONSTRAINT section1_id_fk
 FOREIGN KEY(section_id)
 REFERENCES sections(section_id);
-
-CREATE TABLE courses (
-	course_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	title VARCHAR(30) NOT NULL,
-	credits DOUBLE(3, 1) NOT NULL,
-	remarks VARCHAR(255)
-)ENGINE=INNODB;
-
-ALTER TABLE courses
-ADD COLUMN department_id INT UNSIGNED,
-ADD CONSTRAINT department4_id_fk
-FOREIGN KEY(department_id)
-REFERENCES departments(department_id);
-
-ALTER TABLE courses
-ADD COLUMN fee_id INT UNSIGNED,
-ADD CONSTRAINT fee2_id_fk
-FOREIGN KEY(fee_id)
-REFERENCES fees(fee_id);
-
-CREATE TABLE exams (
-	exam_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	exam_type VARCHAR(60) NOT NULL,
-	subject VARCHAR(60) NOT NULL,
-	exam_date DATE NOT NULL,
-	time VARCHAR(30) NOT NULL,
-	remarks VARCHAR(255)
-)ENGINE=INNODB;
-
-ALTER TABLE exams
-ADD COLUMN department_id INT UNSIGNED,
-ADD CONSTRAINT department3_id_fk
-FOREIGN KEY(department_id)
-REFERENCES departments(department_id);
-
-ALTER TABLE exams
-ADD COLUMN fee_id INT UNSIGNED,
-ADD CONSTRAINT fee1_id_fk
-FOREIGN KEY(fee_id)
-REFERENCES fees(fee_id);
-
-CREATE TABLE admins (
-	admin_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	first_name VARCHAR(30) NOT NULL,
-    middle_name VARCHAR(30),
-	last_name VARCHAR(30) NOT NULL,
-	email VARCHAR(60) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-	address VARCHAR (100) NOT NULL,
-	gender VARCHAR(15),
-	date_of_birth DATE NOT NULL,
-	contact VARCHAR(50) NOT NULL
-)ENGINE=INNODB;
-
-ALTER TABLE admins
-ADD COLUMN role_id INT UNSIGNED,
-ADD CONSTRAINT role3_id_fk
-FOREIGN KEY(role_id)
-REFERENCES roles(role_id);
-
-INSERT INTO admins(first_name, middle_name, last_name, email, password, address, gender, date_of_birth, contact, role_id) 
-VALUES("Udip", "Yakkha", "Rai", "admin@gmail.com", "adminpass", "Tarkeshwor", "Male", "1998-09-24", 6633445598, 1);
-
-
-
-
 
 
 
